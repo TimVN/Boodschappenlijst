@@ -21,14 +21,22 @@
         <div class="row">
             <div class="col-xs-12">
                 <h1> Vandaag <i class="fa fa-plus solid" ng-click="Groceries.addGrocery()"></i></h1>
+                <div class="col-xs-12 nopad">
+                    <div class="col-xs-1 nopad">Tijdstip</div>
+                    <div class="col-xs-5 nopad">Naam</div>
+                    <div class="col-xs-4 nopad">Hoeveelheid</div>
+                    <div class="col-xs-2 nopad">Acties</div>
+                </div>
                 <div id="grocery_list">
                     <div class="col-xs-12 nopad grocery"
                          ng-repeat="(i, item) in Groceries.today"
                          ng-init="hover = false" ng-mouseenter="hover = true" ng-mouseleave="hover = false"
                          ng-class="{'highlight': hover}">
                         <div class="col-xs-1 nopad">{{item.timestamp | date : "HH:mm"}}</div>
-                        <div class="col-xs-9 nopad">{{item.name}}</div>
+                        <div class="col-xs-5 nopad">{{item.name}}</div>
+                        <div class="col-xs-4 nopad">{{item.amount}}</div>
                         <div class="col-xs-2 nopad">
+                            <i class="fa fa-pencil solid" ng-click="Groceries.editGrocery(item)"></i>
                             <i class="fa fa-remove solid" ng-click="Groceries.deleteGrocery(item.id)"></i>
                         </div>
                     </div>

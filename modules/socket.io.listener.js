@@ -8,8 +8,17 @@ module.exports = function(io, db) {
         socket.on('insert:grocery', function (data) {
             db.table('grocery')
             .insert({
-                name: data,
+                name: data.name,
+                amount: data.amount,
                 timestamp: db.now()
+            }).run(db.conn, function(err, res) {
+                io.emit('return:groceries_changed');
+            });
+        });
+
+        socket.on('update:grocery', function(data) {
+            db.table('grocery').get(data.id).update({
+                amount: data.amount
             }).run(db.conn, function(err, res) {
                 io.emit('return:groceries_changed');
             });
