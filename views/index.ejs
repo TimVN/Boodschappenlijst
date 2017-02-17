@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="Master">
+  <head>
+    <title>Nice boodschappen <%= title %>%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/animate.css' />
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/javascripts/ui-bootstrap-tpls.js"></script>
+    <script src="/javascripts/master.js"></script>
+    <script src="/javascripts/angular-prompt.min.js"></script>
+    <script src="/javascripts/socket.factory.js"></script>
+    <script src="/javascripts/groceries.controller.js"></script>
+  </head>
+  <body ng-controller="GroceriesController as Groceries">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> Vandaag <i class="fa fa-plus solid" ng-click="Groceries.addGrocery()"></i></h1>
+                <div id="grocery_list">
+                    <div class="col-xs-12 nopad grocery"
+                         ng-repeat="(i, item) in Groceries.today"
+                         ng-init="hover = false" ng-mouseenter="hover = true" ng-mouseleave="hover = false"
+                         ng-class="{'highlight': hover}">
+                        <div class="col-xs-1 nopad">{{item.timestamp | date : "HH:mm"}}</div>
+                        <div class="col-xs-9 nopad">{{item.name}}</div>
+                        <div class="col-xs-2 nopad">
+                            <i class="fa fa-remove solid" ng-click="Groceries.deleteGrocery(item.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
